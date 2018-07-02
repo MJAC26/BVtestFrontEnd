@@ -1,5 +1,9 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
+<h1>Reports</h1>
+
+{{log model}}
+
+{{#each model.emails as |report|}}
+	<p>{{report}}</p>
+{{/each}}
 
 {{outlet}}
