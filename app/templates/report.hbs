@@ -1,4 +1,72 @@
 
-{{input value=emailinp type="text" placeholder='email' size="50"}}
-<button {{action "genReport"}}>Search</button>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<label>Search for:</label>
+		{{input value=emailinp type="text" placeholder='Email' size="20"}}
+		<button {{action "genReport"}} class="btn btn-success">Search</button>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+			{{#each reportData as |reportdata index|}}
+				<div class="panel-heading">
+					<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{index}}">
+					{{reportdata.report.email}}</a>
+					</h4>
+				</div>
+				<div id="collapse{{index}}" class="panel-collapse collapse">
+					<div class="panel-body">
+						<div class="card">
+							<img src="{{reportdata.report.image}}" alt="Avatar">
+							<div class="cardcontainer">
+								<i class='fa fa-address-card-o'></i> Name: <ul>
+								{{#each reportdata.report.names as |name|}}
+								<li>{{name.full}}</li>
+								{{else}}
+								<li>No name data</li>
+								{{/each}}
+								</ul>
+								<p><i class='fa fa-birthday-cake'></i> Birth: {{reportdata.report.dob}}</p>
+								<p><i class='fa fa-users'></i> Gender: {{reportdata.report.gender}}</p>
+								<i class='fa fa-envelope'></i> Emails: <ul>
+								{{#each reportdata.report.emails as |email|}}
+								<li>{{email.email_address}}</li>
+								{{else}}
+								<li>No email data</li>
+								{{/each}}
+								</ul>
+								<i class='fa fa-briefcase'></i> Jobs: <ul class="joblist">
+								{{#each reportdata.report.jobs as |job|}}
+								<li>
+									<span class="job-company">{{job.company}}</span> <br> 
+									{{#if job.title}}
+									<span class="job-title">{{job.title}}</span> <br> 
+									{{else}}
+									<span class="job-period">No job data</span>
+									{{/if}}
+									{{#if job.period.start}}
+									<span class="job-period">{{job.period.start}} - {{if job.period.end job.period.end 'Actually'}}</span>
+									{{else}}
+									<span class="job-period">No period data</span>
+									{{/if}}
+								</li>
+								{{else}}
+								<li>No job data</li>
+								{{/each}}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			{{else}}
+				<span>No data to show</span>
+			{{/each}}
+			</div>
+		</div>
+	</div>
+</div>
 {{outlet}}

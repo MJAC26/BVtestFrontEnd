@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-// import $ from 'jquery';
 
 export default DS.RESTAdapter.extend({
 	namespace: 'hk/dd',
@@ -9,13 +8,4 @@ export default DS.RESTAdapter.extend({
         hash.dataType = "jsonp";
         return hash;
     }
- //    ,
-	// queryRecord(store, type, query) {
-	// 	// console.log(query);
-	// 	// return $.getJSON('https://www.beenverified.com/hk/dd');
-	// 	var hash = this._super('https://www.beenverified.com/hk/dd', type, query);
- //        hash.dataType = "jsonp";
- //        console.log(hash);
- //        return hash;
-	// }
 });

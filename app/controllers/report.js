@@ -1,9 +1,17 @@
 import Controller from '@ember/controller';
 import { storageFor } from 'ember-local-storage';
+import {computed} from '@ember/object'
 
 export default Controller.extend({
 	emailinp: '',
 	localdata: storageFor('reports'),
+	reportData: computed('localdata.[]', function(){
+		if(this.get('localdata.lenght') == 0){
+			return [];
+		} else {
+			return this.get('localdata.content');
+		}
+	}),
 
 	init() {
 		this._super(...arguments);
@@ -12,18 +20,13 @@ export default Controller.extend({
 	actions: {
 		genReport() {
 			let emaildata = this.get('emailinp');
-			let store = this.get('store');
-			console.log(emaildata);
 			this.get('store').queryRecord('email', {
 				email: emaildata
-			}).then( function(result) {
-				console.log(result);
-				let tmp = this.get('localdata');
-				console.log(tmp);
-				let x = result.get('gender');
-				console.log(x);
-				store.pushPayload(result);
-			});
+			}).then(function(){
+				this.transitionTo('report');
+			}).catch(function(){
+				alert('No records found');
+			})
 		}
 	}
 });

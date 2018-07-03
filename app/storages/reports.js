@@ -1,6 +1,6 @@
-import StorageObject from 'ember-local-storage/local/object';
+import StorageArray from 'ember-local-storage/local/array';
 
-const Storage = StorageObject.extend();
+const Storage = StorageArray.extend();
 
 // Uncomment if you would like to set initialState
 // Storage.reopenClass({

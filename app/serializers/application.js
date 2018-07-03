@@ -12,37 +12,15 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin,{
 				addresses: payload.addresses,
 				emails: payload.emails,
 				dob: payload.dob,
-				gender: payload.gender
+				gender: payload.gender,
+				email: payload.emails[0].email_address,
+				image: payload.images[0].thumb,
+				phones: payload.phones,
+				jobs: payload.jobs
 			}, 
 			'id': payload.report_info.report_id
 		};
-        // payload.id = payload.report_info.report_id
-        console.log(payload);
         this.get('localdata').addObject(payload);
-        // console.log(this.get('localdata'));
-        // store.pushPayload(payload);
         return this._super(store, primaryModelClass, payload, id, requestType);
     },
- //    normalizePayload: function(payload) {
-	// 	return {
-	// 		'email': {
-	// 			id: payload.report_info.report_id,
-	// 			report_info: payload.report_info,
-	// 			name: payload.names,
-	// 			address: payload.addresses,
-	// 			email: payload.emails,
-	// 			dob: payload.dob,
-	// 			gender: payload.gender
-	// 		}
-	// 	};
-	// },
-	// attrs: {
-	// 	report_info: { embedded: 'always'},
-	// 	name: { embedded: 'always'},
-	// 	address: { embedded: 'always'},
-	// 	email: { embedded: 'always'},
-	// 	dob: { embedded: 'always'},
-	// 	gender: { embedded: 'always'}
-	// },
-	// primaryKey: 'gender'
 });
